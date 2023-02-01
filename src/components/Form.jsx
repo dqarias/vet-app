@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Form = () => {
+const Form = ({ getPatients }) => {
   const [dataForm, setDataForm] = useState({
     petName: "",
     ownerName: "",
@@ -16,6 +16,19 @@ const Form = () => {
     }));
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("clicked");
+    getPatients(dataForm);
+    setDataForm({
+      petName: "",
+      ownerName: "",
+      ownerEmail: "",
+      dateAppoinment: "",
+      petSymptom: "",
+    });
+  };
+
   console.log(dataForm);
 
   return (
@@ -25,7 +38,10 @@ const Form = () => {
         Add and manage{" "}
         <span className="text-indigo-600 font-bold">patients</span>
       </p>
-      <form action="" className="mt-5 bg-white rounded-sm shadow-md py-3 px-5">
+      <form
+        onSubmit={handleSubmit}
+        className="mt-5 bg-white rounded-sm shadow-md py-3 px-5"
+      >
         <div className="mb-5">
           <label
             htmlFor="pet"
