@@ -38,6 +38,13 @@ function App() {
     setPatients(patientsUpdate);
   };
 
+  const deletePatient = (id) => {
+    const patientsDelete = patients.filter(
+      (patientDelete) => patientDelete.id != id
+    );
+    setPatients(patientsDelete);
+  };
+
   console.log("patients", patients);
 
   return (
@@ -50,7 +57,11 @@ function App() {
           setPatient={setPatient}
           updatePatient={updatePatient}
         />
-        <PatientList patients={patients} setPatient={setPatient} />
+        <PatientList
+          patients={patients}
+          setPatient={setPatient}
+          deletePatient={deletePatient}
+        />
       </div>
     </div>
   );

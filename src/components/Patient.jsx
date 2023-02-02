@@ -1,10 +1,15 @@
 import React from "react";
 
-const Patient = ({ patientData, setPatient }) => {
-    const handleEdit = (e) => {
-        e.preventDefault();
-        setPatient(patientData)
-    }
+const Patient = ({ patientData, setPatient, deletePatient }) => {
+  const handleEdit = (e) => {
+    e.preventDefault();
+    setPatient(patientData);
+  };
+
+  const handleDelete = () => {
+    console.log("click");
+    deletePatient(patientData.id);
+  };
 
   return (
     <div className="m-5 bg-white shadow-md px-5 py-2 rounded-xl">
@@ -45,6 +50,7 @@ const Patient = ({ patientData, setPatient }) => {
         <button
           type="button"
           className="py-2 px-10 bg-red-600 hover:bg-red-700 text-white font-bold uppercase rounded-lg"
+          onClick={handleDelete}
         >
           Delete
         </button>
