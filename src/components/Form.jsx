@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const Form = ({ getPatients, patient }) => {
+const Form = ({ getPatients, patient, setPatient, updatePatient }) => {
   const [dataForm, setDataForm] = useState({
     petName: "",
     ownerName: "",
@@ -9,7 +9,17 @@ const Form = ({ getPatients, patient }) => {
     petSymptom: "",
   });
 
-  useEffect(() => {}, [patient]);
+  useEffect(() => {
+    if (Object.keys(patient).length > 0) {
+      setDataForm({
+        petName: patient.petName,
+        ownerName: patient.ownerName,
+        ownerEmail: patient.ownerEmail,
+        dateAppoinment: patient.dateAppoinment,
+        petSymptom: patient.petSymptom,
+      });
+    }
+  }, [patient]);
 
   const handleChange = (e) => {
     setDataForm((prevState) => ({
@@ -21,7 +31,12 @@ const Form = ({ getPatients, patient }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("clicked");
-    getPatients(dataForm);
+    if (patient.id) {
+      updatePatient(patient.id, dataForm);
+    } else {
+      getPatients(dataForm);
+    }
+
     setDataForm({
       petName: "",
       ownerName: "",
@@ -29,6 +44,7 @@ const Form = ({ getPatients, patient }) => {
       dateAppoinment: "",
       petSymptom: "",
     });
+    setPatient({});
   };
 
   console.log(dataForm);
@@ -131,7 +147,7 @@ const Form = ({ getPatients, patient }) => {
         <input
           type="submit"
           className="bg-indigo-600 w-full p-3 text-white uppercase font-bold hover:bg-indigo-700 cursor-pointer"
-          value="Add Patient"
+          value={patient.id ? "Edit Patient" : "Add Patient"}
         />
       </form>
     </div>
