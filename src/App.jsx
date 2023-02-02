@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 
 function App() {
   const [patients, setPatients] = useState([]);
+  const [patient, setPatient] = useState({});
 
   const getPatients = (data) => {
     const newData = {
@@ -26,8 +27,8 @@ function App() {
     <div className="container mx-auto mt-20">
       <Header />
       <div className="mt-12 flex">
-        <Form getPatients={getPatients} />
-        <PatientList />
+        <Form getPatients={getPatients} patient={patient} />
+        <PatientList patients={patients} setPatient={setPatient} />
       </div>
     </div>
   );

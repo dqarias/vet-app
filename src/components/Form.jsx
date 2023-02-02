@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-const Form = ({ getPatients }) => {
+const Form = ({ getPatients, patient }) => {
   const [dataForm, setDataForm] = useState({
     petName: "",
     ownerName: "",
@@ -8,6 +8,8 @@ const Form = ({ getPatients }) => {
     dateAppoinment: "",
     petSymptom: "",
   });
+
+  useEffect(() => {}, [patient]);
 
   const handleChange = (e) => {
     setDataForm((prevState) => ({
